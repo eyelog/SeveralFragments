@@ -51,4 +51,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1"
+
+    // DI
+    implementation "com.google.dagger:dagger:2.45"
+    kapt "com.google.dagger:dagger-compiler:2.45"
 }

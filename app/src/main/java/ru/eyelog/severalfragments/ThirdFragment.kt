@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import ru.eyelog.severalfragments.di.DaggerVMComponent
+import javax.inject.Inject
 
 class ThirdFragment : Fragment() {
 
-    private val viewModel: AwesomeViewModel by viewModels {
-        AwesomeViewModel.Factory
-    }
+    @Inject
+    lateinit var viewModel: AwesomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +26,15 @@ class ThirdFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (requireActivity() as MainActivity).injectFragment(this)
+
+
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
+        val button = view.findViewById<Button>(R.id.tapFragmentButton)
+
+        button.setOnClickListener {
+            viewModel.buttonClicked()
+        }
 
         viewModel.titleLiveData.observe(viewLifecycleOwner) {
             tvTitle.text = it
